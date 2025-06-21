@@ -49,11 +49,11 @@ def criar_banner(dados):
         cor_destaque = "darkred"  # Cor diferente pra horário ou data, se quiser destacar
 
         # Adiciona textos no banner (ajustado mais pra baixo)
-        draw.text((330, 400), f"{dados['time_casa']} {dados['placar_casa']}",
+        draw.text((290, 480), f"{dados['time_casa']} {dados['placar_casa']}",
                   font=fonte_grande, fill=cor_texto)
-        draw.text((330, 490), f"{dados['time_fora']} {dados['placar_fora']}",
+        draw.text((290, 550), f"{dados['time_fora']} {dados['placar_fora']}",
                   font=fonte_grande, fill=cor_texto)
-        draw.text((330, 600), f"{dados['data']} - {dados['horario']}",
+        draw.text((290, 670), f"{dados['data']} - {dados['horario']}",
                   font=fonte_pequena, fill=cor_destaque)
 
         # Salva temporariamente
