@@ -1,4 +1,4 @@
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from telegram.ext import ApplicationBuilder, ContextTypes
 from telegram import Update
 from PIL import Image, ImageDraw, ImageFont
 import logging
@@ -12,11 +12,11 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Configurações do banner (MODIFIQUE AQUI)
-CHAT_ID = -1002841860609  # ID do seu grupo
-TOKEN = "7642062953:AAEcofpmtP1KLWOQI20zmsbEYahZkKbk6Oo"  # Token do seu bot
+# Configurações
+CHAT_ID = -1002841860609  # ID do grupo
+TOKEN = "7642062953:AAEcofpmtP1KLWOQI20zmsbEYahZkKbk6Oo"  # Token do bot
 
-# Dados do banner (personalize)
+# Dados do banner
 DADOS_BANNER = {
     'time_casa': 'Real Madrid',
     'time_fora': 'Barcelona',
@@ -28,31 +28,38 @@ DADOS_BANNER = {
 
 
 def criar_banner(dados):
-    """Cria a imagem do banner"""
+    """Cria a imagem do banner com fundo personalizado"""
     try:
-        # Cria imagem (800x600 pixels)
-        img = Image.new('RGB', (800, 600), color='#1a3e72')
+        # Carrega o fundo
+        fundo = Image.open('base_banner.png').convert('RGBA')
+        img = fundo.copy()
+
         draw = ImageDraw.Draw(img)
 
-        # Carrega fontes (substitua pelas suas)
+        # Fontes
         try:
-            fonte_grande = ImageFont.truetype("arialbd.ttf", 60)
-            fonte_pequena = ImageFont.truetype("arial.ttf", 30)
+            fonte_grande = ImageFont.truetype("arialbd.ttf", 70)  # Fonte maior pra destacar
+            fonte_pequena = ImageFont.truetype("arial.ttf", 40)
         except:
             fonte_grande = ImageFont.load_default()
             fonte_pequena = ImageFont.load_default()
 
-        # Textos do banner
-        draw.text((200, 100), f"{dados['time_casa']} {dados['placar_casa']}",
-                  font=fonte_grande, fill="white")
-        draw.text((200, 200), f"{dados['time_fora']} {dados['placar_fora']}",
-                  font=fonte_grande, fill="white")
-        draw.text((200, 300), f"{dados['data']} - {dados['horario']}",
-                  font=fonte_pequena, fill="yellow")
+        # Cores
+        cor_texto = "black"  # Texto preto pra fundo claro
+        cor_destaque = "darkred"  # Cor diferente pra horário ou data, se quiser destacar
+
+        # Adiciona textos no banner (ajustado mais pra baixo)
+        draw.text((330, 400), f"{dados['time_casa']} {dados['placar_casa']}",
+                  font=fonte_grande, fill=cor_texto)
+        draw.text((330, 490), f"{dados['time_fora']} {dados['placar_fora']}",
+                  font=fonte_grande, fill=cor_texto)
+        draw.text((330, 600), f"{dados['data']} - {dados['horario']}",
+                  font=fonte_pequena, fill=cor_destaque)
 
         # Salva temporariamente
-        img.save("banner_temp.png")
-        return "banner_temp.png"
+        output_path = "banner_temp.png"
+        img.convert('RGB').save(output_path)
+        return output_path
 
     except Exception as e:
         logger.error(f"Erro ao criar banner: {e}")
@@ -70,7 +77,7 @@ async def enviar_banner_automatico(context: ContextTypes.DEFAULT_TYPE):
                     photo=banner,
                     caption="⚽ Partida do Dia! ⚽"
                 )
-            os.remove(banner_path)  # Limpa o arquivo temporário
+            os.remove(banner_path)
             logger.info("Banner enviado com sucesso!")
     except Exception as e:
         logger.error(f"Falha ao enviar banner: {e}")
