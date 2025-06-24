@@ -3,8 +3,8 @@ from PIL import Image, ImageDraw, ImageFont
 from telegram import Bot
 from telegram.error import TelegramError
 
-TOKEN = '7642062953:AAEcofpmtP1KLWOQI20zmsbEYahZkKbk6Oo'
-CHAT_ID = 8171467371
+TOKEN = 'SEU TOKEN AQUI'
+CHAT_ID = SEU CHAT_ID AQUI
 
 bot = Bot(token=TOKEN)
 
