@@ -5,8 +5,8 @@ import logging
 import os
 
 # Configurações do bot
-TOKEN = "7642062953:AAEcofpmtP1KLWOQI20zmsbEYahZkKbk6Oo"  # ⚠️ Coloque seu token aqui
-CHAT_ID = -1002841860609  # ✅ ID do grupo onde o banner será postado
+TOKEN = "SEU TOKEN AQUI"  # ⚠️ Coloque seu token aqui
+CHAT_ID = SEU CHAT_ID AQUI  # ✅ ID do grupo onde o banner será postado
 
 # Configuração do log
 logging.basicConfig(
