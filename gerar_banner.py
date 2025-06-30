@@ -4,7 +4,7 @@ from telegram import Bot
 from telegram.error import TelegramError
 
 TOKEN = 'SEU TOKEN AQUI'
-CHAT_ID = SEU CHAT_ID AQUI
+CHAT_ID = SEU CHAT_ID AQUI.
 
 bot = Bot(token=TOKEN)
 
