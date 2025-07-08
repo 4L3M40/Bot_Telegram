@@ -1,7 +1,7 @@
 # 🤖 Bot Telegram - Banner de Jogos
 
 Projeto de bot para Telegram que gera e envia automaticamente um banner de resultados de partidas para um grupo específico.  
-Feito em Python com `python-telegram-bot` e `PIL` para manipulação de imagens
+Feito em Python com `python-telegram-bot` e `PIL` para manipulação de imagens.
 
 ---
 
